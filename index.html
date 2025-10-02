@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Co-Siembra Digital</title>
+    <title>Co-Siembra Digital - Web</title>
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 
@@ -11,13 +11,12 @@
         /* --- ESTILOS GENERALES Y FUENTE --- */
         @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
 
-        /* --- Variables de color para fácil personalización --- */
         :root {
             --primary-green: #2A9D8F;
             --light-gray: #f0f2f5;
             --dark-text: #333;
             --white: #ffffff;
-            --shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            --shadow: 0 6px 20px rgba(0, 0, 0, 0.1); /* Sombra un poco más pronunciada para web */
         }
 
         * {
@@ -30,50 +29,50 @@
             font-family: 'Poppins', sans-serif;
             background-color: var(--light-gray);
             display: flex;
-            justify-content: center;
+            flex-direction: column; /* Cambiado a columna para el footer */
+            justify-content: space-between; /* Espacia el contenido y el footer */
             align-items: center;
             min-height: 100vh;
             color: var(--dark-text);
         }
 
-        /* --- SIMULACIÓN DEL SMARTPHONE --- */
-        .smartphone-mockup {
-            width: 375px;
-            height: 812px;
-            background-color: var(--white);
-            border: 12px solid #111;
-            border-radius: 40px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-            position: relative;
-            overflow: hidden;
+        /* --- CONTENEDOR PRINCIPAL PARA LA WEB --- */
+        .web-container {
+            flex-grow: 1; /* Permite que el contenedor principal ocupe el espacio disponible */
             display: flex;
             flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            max-width: 960px; /* Ancho máximo para el contenido central */
+            padding: 20px;
         }
 
         /* --- ENCABEZADO DE LA APP --- */
         .app-header {
-            padding: 50px 20px 20px 20px;
+            padding: 40px 20px 30px 20px; /* Ajustado para web */
             text-align: center;
         }
 
         .app-header h1 {
-            font-size: 1.8em;
+            font-size: 3em; /* Tamaño de título más grande para web */
             font-weight: 600;
+            color: var(--primary-green); /* Color verde para el título principal */
         }
 
         /* --- CUADRÍCULA DE BOTONES --- */
         .button-grid {
             display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 20px;
-            padding: 20px;
-            flex-grow: 1;
+            grid-template-columns: repeat(2, 1fr); /* 2 columnas para el diseño web */
+            gap: 30px; /* Espacio entre botones */
+            padding: 30px 0;
+            width: 100%; /* Ocupa todo el ancho disponible del contenedor */
         }
 
         .grid-button {
             background-color: var(--white);
             border: 1px solid #e0e0e0;
-            border-radius: 20px;
+            border-radius: 25px; /* Bordes ligeramente más redondeados */
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -81,39 +80,42 @@
             text-decoration: none;
             color: var(--dark-text);
             font-weight: 600;
-            font-size: 1em;
+            font-size: 1.2em; /* Texto un poco más grande */
+            padding: 40px 20px; /* Relleno para hacer los botones más grandes */
             cursor: pointer;
-            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
             box-shadow: var(--shadow);
         }
 
         .grid-button:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 20px rgba(42, 157, 143, 0.2);
+            transform: translateY(-8px); /* Mayor efecto al pasar el ratón */
+            box-shadow: 0 12px 25px rgba(42, 157, 143, 0.3); /* Sombra de hover más intensa */
+            background-color: #f8fcfb; /* Ligero cambio de fondo al hover */
         }
 
         .grid-button i {
-            font-size: 2.5em;
+            font-size: 3.5em; /* Íconos más grandes */
             color: var(--primary-green);
-            margin-bottom: 15px;
+            margin-bottom: 20px;
         }
 
-        /* --- CINTA DE NOTICIAS --- */
+        /* --- CINTA DE NOTICIAS (FOOTER) --- */
         .news-ticker {
             width: 100%;
             background-color: var(--primary-green);
             color: var(--white);
-            padding: 12px 0;
-            position: absolute;
-            bottom: 20px; /* Alineado sobre la barra de inicio del teléfono */
+            padding: 15px 0; /* Más relleno */
             overflow: hidden;
             white-space: nowrap;
+            margin-top: auto; /* Empuja el ticker al fondo */
+            box-shadow: 0 -4px 15px rgba(0, 0, 0, 0.1);
         }
 
         .news-ticker p {
             display: inline-block;
             padding-left: 100%;
-            animation: scroll-left 20s linear infinite;
+            animation: scroll-left 25s linear infinite; /* Animación más lenta para mejor lectura */
+            font-size: 0.95em;
         }
 
         @keyframes scroll-left {
@@ -127,12 +129,12 @@
 
         /* --- VENTANA MODAL (MENSAJE EMERGENTE) --- */
         .modal-overlay {
-            position: absolute;
+            position: fixed; /* Fixed para que cubra toda la ventana del navegador */
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background-color: rgba(0, 0, 0, 0.6);
+            background-color: rgba(0, 0, 0, 0.7); /* Fondo más oscuro */
             display: none; /* Oculto por defecto */
             justify-content: center;
             align-items: center;
@@ -141,12 +143,13 @@
 
         .modal-content {
             background-color: var(--white);
-            padding: 40px;
-            border-radius: 20px;
+            padding: 50px; /* Más relleno */
+            border-radius: 25px; /* Bordes más redondeados */
             text-align: center;
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
-            width: 80%;
-            transform: scale(0.9);
+            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.4);
+            max-width: 500px; /* Ancho máximo para el modal */
+            transform: scale(0.8); /* Empieza más pequeño */
+            opacity: 0;
             animation: pop-in 0.3s forwards ease-out;
         }
 
@@ -158,46 +161,70 @@
         }
         
         .modal-content i {
-            font-size: 3em;
+            font-size: 4em; /* Ícono más grande */
             color: var(--primary-green);
-            margin-bottom: 20px;
+            margin-bottom: 25px;
         }
 
         .modal-content h2 {
-            font-size: 1.5em;
-            margin-bottom: 10px;
+            font-size: 2em; /* Título más grande */
+            margin-bottom: 15px;
+            color: var(--dark-text);
         }
         
         .modal-content p {
-            font-size: 1em;
-            color: #666;
-            margin-bottom: 30px;
+            font-size: 1.1em; /* Texto más grande */
+            color: #555;
+            margin-bottom: 40px;
+            line-height: 1.6;
         }
 
         .modal-close-button {
             background-color: var(--primary-green);
             color: var(--white);
             border: none;
-            padding: 12px 30px;
-            border-radius: 10px;
-            font-size: 1em;
+            padding: 15px 40px; /* Botón más grande */
+            border-radius: 12px;
+            font-size: 1.1em;
             font-weight: 600;
             cursor: pointer;
-            transition: background-color 0.2s ease;
+            transition: background-color 0.2s ease, transform 0.1s ease;
         }
 
         .modal-close-button:hover {
             background-color: #248a7f;
+            transform: translateY(-2px);
+        }
+
+        /* --- Media Queries para Responsive Design (opcional pero bueno para PC) --- */
+        @media (max-width: 768px) {
+            .button-grid {
+                grid-template-columns: 1fr; /* Una columna en pantallas más pequeñas */
+            }
+            .app-header h1 {
+                font-size: 2.5em;
+            }
+            .grid-button {
+                padding: 30px 15px;
+                font-size: 1em;
+            }
+            .grid-button i {
+                font-size: 3em;
+            }
+            .modal-content {
+                width: 90%;
+                padding: 30px;
+            }
         }
 
     </style>
 </head>
 <body>
 
-    <div class="smartphone-mockup">
-
+    <div class="web-container">
         <header class="app-header">
             <h1>Co-Siembra Digital</h1>
+            <p>Conectando el campo con la oportunidad</p>
         </header>
 
         <main class="button-grid">
@@ -210,26 +237,22 @@
                 <span>Vender Cosecha</span>
             </a>
             <a class="grid-button" onclick="showModal()">
-                <i class="fa-solid fa-leaf"></i>
-                <span>Asesor Técnico</span>
+                <i class="fa-solid fa-seedling"></i> <span>Asesor Técnico</span>
             </a>
             <a class="grid-button" onclick="showModal()">
-                <i class="fa-solid fa-users"></i>
-                <span>Compras en Grupo</span>
+                <i class="fa-solid fa-people-group"></i> <span>Compras en Grupo</span>
             </a>
         </main>
-
-        <div class="news-ticker">
-            <p><strong>Noticias Importantes:</strong> Abierta la convocatoria para créditos de siembra de temporada. • ¡Nuevos compradores en la región! Revisa la sección de mercado. •</p>
-        </div>
-
     </div>
+
+    <footer class="news-ticker">
+        <p><strong>Noticias Importantes:</strong> Abierta la convocatoria para créditos de siembra de temporada. • ¡Nuevos compradores en la región! Revisa la sección de mercado. • ¡Capacitación gratuita sobre cultivos sostenibles este viernes! •</p>
+    </footer>
 
     <div class="modal-overlay" id="constructionModal" onclick="closeModal()">
         <div class="modal-content" onclick="event.stopPropagation()">
-            <i class="fa-solid fa-helmet-safety"></i>
-            <h2>¡Ups!</h2>
-            <p>Esta sección aún está en construcción. ¡Volveremos pronto con más herramientas para ti!</p>
+            <i class="fa-solid fa-person-digging"></i> <h2>¡Ups!</h2>
+            <p>Esta sección aún está en construcción. Estamos trabajando arduamente para traerte las mejores herramientas. ¡Volveremos pronto con más novedades!</p>
             <button class="modal-close-button" onclick="closeModal()">Entendido</button>
         </div>
     </div>
