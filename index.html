@@ -11,6 +11,7 @@
         /* --- ESTILOS GENERALES Y FUENTE --- */
         @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
 
+        /* --- Variables de color para fácil personalización --- */
         :root {
             --primary-green: #2A9D8F;
             --light-gray: #f0f2f5;
@@ -120,7 +121,7 @@
                 transform: translateX(0%);
             }
             100% {
-                transform: translateX(-200%); /* Ajustado para un bucle más suave */
+                transform: translateX(-200%);
             }
         }
 
@@ -234,8 +235,6 @@
     </div>
 
     <script>
-        // --- JAVASCRIPT PARA LA FUNCIONALIDAD DEL MODAL ---
-
         // Seleccionamos el elemento del modal
         const modal = document.getElementById('constructionModal');
 
@@ -248,7 +247,6 @@
         function closeModal() {
             modal.style.display = 'none';
         }
-
     </script>
 
 </body>
