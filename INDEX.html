@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Co-Siembra Digital</title>
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+    <style>
+        /* --- ESTILOS GENERALES Y FUENTE --- */
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+
+        :root {
+            --primary-green: #2A9D8F;
+            --light-gray: #f0f2f5;
+            --dark-text: #333;
+            --white: #ffffff;
+            --shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--light-gray);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            color: var(--dark-text);
+        }
+
+        /* --- SIMULACIÓN DEL SMARTPHONE --- */
+        .smartphone-mockup {
+            width: 375px;
+            height: 812px;
+            background-color: var(--white);
+            border: 12px solid #111;
+            border-radius: 40px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* --- ENCABEZADO DE LA APP --- */
+        .app-header {
+            padding: 50px 20px 20px 20px;
+            text-align: center;
+        }
+
+        .app-header h1 {
+            font-size: 1.8em;
+            font-weight: 600;
+        }
+
+        /* --- CUADRÍCULA DE BOTONES --- */
+        .button-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            padding: 20px;
+            flex-grow: 1;
+        }
+
+        .grid-button {
+            background-color: var(--white);
+            border: 1px solid #e0e0e0;
+            border-radius: 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-decoration: none;
+            color: var(--dark-text);
+            font-weight: 600;
+            font-size: 1em;
+            cursor: pointer;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            box-shadow: var(--shadow);
+        }
+
+        .grid-button:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(42, 157, 143, 0.2);
+        }
+
+        .grid-button i {
+            font-size: 2.5em;
+            color: var(--primary-green);
+            margin-bottom: 15px;
+        }
+
+        /* --- CINTA DE NOTICIAS --- */
+        .news-ticker {
+            width: 100%;
+            background-color: var(--primary-green);
+            color: var(--white);
+            padding: 12px 0;
+            position: absolute;
+            bottom: 20px; /* Alineado sobre la barra de inicio del teléfono */
+            overflow: hidden;
+            white-space: nowrap;
+        }
+
+        .news-ticker p {
+            display: inline-block;
+            padding-left: 100%;
+            animation: scroll-left 20s linear infinite;
+        }
+
+        @keyframes scroll-left {
+            0% {
+                transform: translateX(0%);
+            }
+            100% {
+                transform: translateX(-200%); /* Ajustado para un bucle más suave */
+            }
+        }
+
+        /* --- VENTANA MODAL (MENSAJE EMERGENTE) --- */
+        .modal-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.6);
+            display: none; /* Oculto por defecto */
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        .modal-content {
+            background-color: var(--white);
+            padding: 40px;
+            border-radius: 20px;
+            text-align: center;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+            width: 80%;
+            transform: scale(0.9);
+            animation: pop-in 0.3s forwards ease-out;
+        }
+
+        @keyframes pop-in {
+            to {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+        
+        .modal-content i {
+            font-size: 3em;
+            color: var(--primary-green);
+            margin-bottom: 20px;
+        }
+
+        .modal-content h2 {
+            font-size: 1.5em;
+            margin-bottom: 10px;
+        }
+        
+        .modal-content p {
+            font-size: 1em;
+            color: #666;
+            margin-bottom: 30px;
+        }
+
+        .modal-close-button {
+            background-color: var(--primary-green);
+            color: var(--white);
+            border: none;
+            padding: 12px 30px;
+            border-radius: 10px;
+            font-size: 1em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.2s ease;
+        }
+
+        .modal-close-button:hover {
+            background-color: #248a7f;
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="smartphone-mockup">
+
+        <header class="app-header">
+            <h1>Co-Siembra Digital</h1>
+        </header>
+
+        <main class="button-grid">
+            <a class="grid-button" onclick="showModal()">
+                <i class="fa-solid fa-hand-holding-dollar"></i>
+                <span>Pedir Crédito</span>
+            </a>
+            <a class="grid-button" onclick="showModal()">
+                <i class="fa-solid fa-cart-shopping"></i>
+                <span>Vender Cosecha</span>
+            </a>
+            <a class="grid-button" onclick="showModal()">
+                <i class="fa-solid fa-leaf"></i>
+                <span>Asesor Técnico</span>
+            </a>
+            <a class="grid-button" onclick="showModal()">
+                <i class="fa-solid fa-users"></i>
+                <span>Compras en Grupo</span>
+            </a>
+        </main>
+
+        <div class="news-ticker">
+            <p><strong>Noticias Importantes:</strong> Abierta la convocatoria para créditos de siembra de temporada. • ¡Nuevos compradores en la región! Revisa la sección de mercado. •</p>
+        </div>
+
+    </div>
+
+    <div class="modal-overlay" id="constructionModal" onclick="closeModal()">
+        <div class="modal-content" onclick="event.stopPropagation()">
+            <i class="fa-solid fa-helmet-safety"></i>
+            <h2>¡Ups!</h2>
+            <p>Esta sección aún está en construcción. ¡Volveremos pronto con más herramientas para ti!</p>
+            <button class="modal-close-button" onclick="closeModal()">Entendido</button>
+        </div>
+    </div>
+
+    <script>
+        // --- JAVASCRIPT PARA LA FUNCIONALIDAD DEL MODAL ---
+
+        // Seleccionamos el elemento del modal
+        const modal = document.getElementById('constructionModal');
+
+        // Función para mostrar el modal
+        function showModal() {
+            modal.style.display = 'flex';
+        }
+
+        // Función para ocultar el modal
+        function closeModal() {
+            modal.style.display = 'none';
+        }
+
+    </script>
+
+</body>
+</html>
