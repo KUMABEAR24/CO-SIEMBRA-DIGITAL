@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>Co-Siembra Digital</title>
-    
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 
     <style>
@@ -116,12 +116,8 @@
         }
 
         @keyframes scroll-left {
-            0% {
-                transform: translateX(0%);
-            }
-            100% {
-                transform: translateX(-200%); /* Ajustado para un bucle más suave */
-            }
+            0% { transform: translateX(0%); }
+            100% { transform: translateX(-200%); }
         }
 
         /* --- VENTANA MODAL (MENSAJE EMERGENTE) --- */
@@ -150,12 +146,9 @@
         }
 
         @keyframes pop-in {
-            to {
-                transform: scale(1);
-                opacity: 1;
-            }
+            to { transform: scale(1); opacity: 1; }
         }
-        
+
         .modal-content i {
             font-size: 3em;
             color: var(--primary-green);
@@ -166,7 +159,7 @@
             font-size: 1.5em;
             margin-bottom: 10px;
         }
-        
+
         .modal-content p {
             font-size: 1em;
             color: #666;
@@ -185,10 +178,10 @@
             transition: background-color 0.2s ease;
         }
 
-        .modal-close-button:hover {
-            background-color: #248a7f;
-        }
+        .modal-close-button:hover { background-color: #248a7f; }
 
+        /* Enlaces de navegación a páginas demo */
+        .grid-button a, .grid-button button { all: unset; display: flex; align-items: center; justify-content: center; width: 100%; height: 100%; cursor: pointer; }
     </style>
 </head>
 <body>
@@ -200,19 +193,23 @@
         </header>
 
         <main class="button-grid">
-            <a class="grid-button" onclick="showModal()">
+            <!-- Ahora cada botón es un enlace a su propia página demo -->
+            <a class="grid-button" href="pedir_credito.html" title="Ir a Pedir Crédito">
                 <i class="fa-solid fa-hand-holding-dollar"></i>
                 <span>Pedir Crédito</span>
             </a>
-            <a class="grid-button" onclick="showModal()">
+
+            <a class="grid-button" href="vender_cosecha.html" title="Ir a Vender Cosecha">
                 <i class="fa-solid fa-cart-shopping"></i>
                 <span>Vender Cosecha</span>
             </a>
-            <a class="grid-button" onclick="showModal()">
+
+            <a class="grid-button" href="asesor_tecnico.html" title="Ir a Asesor Técnico">
                 <i class="fa-solid fa-leaf"></i>
                 <span>Asesor Técnico</span>
             </a>
-            <a class="grid-button" onclick="showModal()">
+
+            <a class="grid-button" href="compras_grupo.html" title="Ir a Compras en Grupo">
                 <i class="fa-solid fa-users"></i>
                 <span>Compras en Grupo</span>
             </a>
@@ -224,6 +221,7 @@
 
     </div>
 
+    <!-- Mantengo el modal para mensajes generales (se puede reutilizar) -->
     <div class="modal-overlay" id="constructionModal" onclick="closeModal()">
         <div class="modal-content" onclick="event.stopPropagation()">
             <i class="fa-solid fa-helmet-safety"></i>
@@ -234,21 +232,11 @@
     </div>
 
     <script>
-        // --- JAVASCRIPT PARA LA FUNCIONALIDAD DEL MODAL ---
-
-        // Seleccionamos el elemento del modal
+        // Modal no usado por defecto en la demo principal,
+        // pero dejo las funciones por si quieres mostrarlo desde otras páginas.
         const modal = document.getElementById('constructionModal');
-
-        // Función para mostrar el modal
-        function showModal() {
-            modal.style.display = 'flex';
-        }
-
-        // Función para ocultar el modal
-        function closeModal() {
-            modal.style.display = 'none';
-        }
-
+        function showModal() { modal.style.display = 'flex'; }
+        function closeModal() { modal.style.display = 'none'; }
     </script>
 
 </body>

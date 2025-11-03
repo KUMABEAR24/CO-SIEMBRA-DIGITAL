@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Vender Cosecha — Co-Siembra Digital</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+  <style>
+    body { font-family: 'Poppins', sans-serif; background:#f6f8fa; color:#222; padding:20px; }
+    .container { max-width:900px; margin:30px auto; background:#fff; padding:24px; border-radius:12px; box-shadow:0 8px 30px rgba(0,0,0,0.08); }
+    h1 { color:#2A9D8F; }
+    .grid { display:grid; grid-template-columns:1fr 320px; gap:20px; align-items:start; }
+    label { font-weight:600; display:block; margin-bottom:6px; }
+    input, select, textarea { width:100%; padding:10px; border-radius:8px; border:1px solid #ddd; }
+    .listings { margin-top:12px; }
+    .listing { border:1px solid #eee; padding:12px; border-radius:8px; margin-bottom:10px; }
+    .actions { margin-top:10px; display:flex; gap:8px; justify-content:flex-end; }
+    button { background:#2A9D8F; color:#fff; padding:8px 12px; border-radius:8px; border:none; cursor:pointer; }
+    a.back { display:inline-flex; align-items:center; gap:8px; color:#2A9D8F; text-decoration:none; margin-bottom:12px; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <a class="back" href="INDEX.html"><i class="fa-solid fa-arrow-left"></i> Volver</a>
+    <h1>Vender Cosecha</h1>
+    <p>Publica una oferta de venta y prueba la lista de compradores (simulada).</p>
+
+    <div class="grid">
+      <div>
+        <form id="sellForm">
+          <div style="margin-bottom:12px;">
+            <label for="producto">Producto</label>
+            <input id="producto" name="producto" placeholder="Ej: Maíz seco" required />
+          </div>
+
+          <div style="display:flex; gap:12px; margin-bottom:12px;">
+            <div style="flex:1">
+              <label for="cantidad">Cantidad (Kg)</label>
+              <input id="cantidad" name="cantidad" type="number" min="1" value="100" required/>
+            </div>
+            <div style="width:140px">
+              <label for="precio">Precio /Kg (COP)</label>
+              <input id="precio" name="precio" type="number" min="1" value="1200" required/>
+            </div>
+          </div>
+
+          ... (truncated for brevity in this query) ...
+        </form>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
