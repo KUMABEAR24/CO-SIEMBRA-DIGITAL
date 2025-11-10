@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Co-Siembra Digital - Web</title>
-    
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Co-Siembra Digital</title>
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 
     <style>
@@ -16,7 +16,7 @@
             --light-gray: #f0f2f5;
             --dark-text: #333;
             --white: #ffffff;
-            --shadow: 0 6px 20px rgba(0, 0, 0, 0.1); /* Sombra un poco más pronunciada para web */
+            --shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
         }
 
         * {
@@ -29,50 +29,50 @@
             font-family: 'Poppins', sans-serif;
             background-color: var(--light-gray);
             display: flex;
-            flex-direction: column; /* Cambiado a columna para el footer */
-            justify-content: space-between; /* Espacia el contenido y el footer */
+            justify-content: center;
             align-items: center;
             min-height: 100vh;
             color: var(--dark-text);
         }
 
-        /* --- CONTENEDOR PRINCIPAL PARA LA WEB --- */
-        .web-container {
-            flex-grow: 1; /* Permite que el contenedor principal ocupe el espacio disponible */
+        /* --- SIMULACIÓN DEL SMARTPHONE --- */
+        .smartphone-mockup {
+            width: 375px;
+            height: 812px;
+            background-color: var(--white);
+            border: 12px solid #111;
+            border-radius: 40px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            position: relative;
+            overflow: hidden;
             display: flex;
             flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            width: 100%;
-            max-width: 960px; /* Ancho máximo para el contenido central */
-            padding: 20px;
         }
 
         /* --- ENCABEZADO DE LA APP --- */
         .app-header {
-            padding: 40px 20px 30px 20px; /* Ajustado para web */
+            padding: 50px 20px 20px 20px;
             text-align: center;
         }
 
         .app-header h1 {
-            font-size: 3em; /* Tamaño de título más grande para web */
+            font-size: 1.8em;
             font-weight: 600;
-            color: var(--primary-green); /* Color verde para el título principal */
         }
 
         /* --- CUADRÍCULA DE BOTONES --- */
         .button-grid {
             display: grid;
-            grid-template-columns: repeat(2, 1fr); /* 2 columnas para el diseño web */
-            gap: 30px; /* Espacio entre botones */
-            padding: 30px 0;
-            width: 100%; /* Ocupa todo el ancho disponible del contenedor */
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            padding: 20px;
+            flex-grow: 1;
         }
 
         .grid-button {
             background-color: var(--white);
             border: 1px solid #e0e0e0;
-            border-radius: 25px; /* Bordes ligeramente más redondeados */
+            border-radius: 20px;
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -80,61 +80,54 @@
             text-decoration: none;
             color: var(--dark-text);
             font-weight: 600;
-            font-size: 1.2em; /* Texto un poco más grande */
-            padding: 40px 20px; /* Relleno para hacer los botones más grandes */
+            font-size: 1em;
             cursor: pointer;
-            transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
             box-shadow: var(--shadow);
         }
 
         .grid-button:hover {
-            transform: translateY(-8px); /* Mayor efecto al pasar el ratón */
-            box-shadow: 0 12px 25px rgba(42, 157, 143, 0.3); /* Sombra de hover más intensa */
-            background-color: #f8fcfb; /* Ligero cambio de fondo al hover */
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(42, 157, 143, 0.2);
         }
 
         .grid-button i {
-            font-size: 3.5em; /* Íconos más grandes */
+            font-size: 2.5em;
             color: var(--primary-green);
-            margin-bottom: 20px;
+            margin-bottom: 15px;
         }
 
-        /* --- CINTA DE NOTICIAS (FOOTER) --- */
+        /* --- CINTA DE NOTICIAS --- */
         .news-ticker {
             width: 100%;
             background-color: var(--primary-green);
             color: var(--white);
-            padding: 15px 0; /* Más relleno */
+            padding: 12px 0;
+            position: absolute;
+            bottom: 20px; /* Alineado sobre la barra de inicio del teléfono */
             overflow: hidden;
             white-space: nowrap;
-            margin-top: auto; /* Empuja el ticker al fondo */
-            box-shadow: 0 -4px 15px rgba(0, 0, 0, 0.1);
         }
 
         .news-ticker p {
             display: inline-block;
             padding-left: 100%;
-            animation: scroll-left 25s linear infinite; /* Animación más lenta para mejor lectura */
-            font-size: 0.95em;
+            animation: scroll-left 20s linear infinite;
         }
 
         @keyframes scroll-left {
-            0% {
-                transform: translateX(0%);
-            }
-            100% {
-                transform: translateX(-200%);
-            }
+            0% { transform: translateX(0%); }
+            100% { transform: translateX(-200%); }
         }
 
         /* --- VENTANA MODAL (MENSAJE EMERGENTE) --- */
         .modal-overlay {
-            position: fixed; /* Fixed para que cubra toda la ventana del navegador */
+            position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background-color: rgba(0, 0, 0, 0.7); /* Fondo más oscuro */
+            background-color: rgba(0, 0, 0, 0.6);
             display: none; /* Oculto por defecto */
             justify-content: center;
             align-items: center;
@@ -143,133 +136,107 @@
 
         .modal-content {
             background-color: var(--white);
-            padding: 50px; /* Más relleno */
-            border-radius: 25px; /* Bordes más redondeados */
+            padding: 40px;
+            border-radius: 20px;
             text-align: center;
-            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.4);
-            max-width: 500px; /* Ancho máximo para el modal */
-            transform: scale(0.8); /* Empieza más pequeño */
-            opacity: 0;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+            width: 80%;
+            transform: scale(0.9);
             animation: pop-in 0.3s forwards ease-out;
         }
 
         @keyframes pop-in {
-            to {
-                transform: scale(1);
-                opacity: 1;
-            }
+            to { transform: scale(1); opacity: 1; }
         }
-        
+
         .modal-content i {
-            font-size: 4em; /* Ícono más grande */
+            font-size: 3em;
             color: var(--primary-green);
-            margin-bottom: 25px;
+            margin-bottom: 20px;
         }
 
         .modal-content h2 {
-            font-size: 2em; /* Título más grande */
-            margin-bottom: 15px;
-            color: var(--dark-text);
+            font-size: 1.5em;
+            margin-bottom: 10px;
         }
-        
+
         .modal-content p {
-            font-size: 1.1em; /* Texto más grande */
-            color: #555;
-            margin-bottom: 40px;
-            line-height: 1.6;
+            font-size: 1em;
+            color: #666;
+            margin-bottom: 30px;
         }
 
         .modal-close-button {
             background-color: var(--primary-green);
             color: var(--white);
             border: none;
-            padding: 15px 40px; /* Botón más grande */
-            border-radius: 12px;
-            font-size: 1.1em;
+            padding: 12px 30px;
+            border-radius: 10px;
+            font-size: 1em;
             font-weight: 600;
             cursor: pointer;
-            transition: background-color 0.2s ease, transform 0.1s ease;
+            transition: background-color 0.2s ease;
         }
 
-        .modal-close-button:hover {
-            background-color: #248a7f;
-            transform: translateY(-2px);
-        }
+        .modal-close-button:hover { background-color: #248a7f; }
 
-        /* --- Media Queries para Responsive Design (opcional pero bueno para PC) --- */
-        @media (max-width: 768px) {
-            .button-grid {
-                grid-template-columns: 1fr; /* Una columna en pantallas más pequeñas */
-            }
-            .app-header h1 {
-                font-size: 2.5em;
-            }
-            .grid-button {
-                padding: 30px 15px;
-                font-size: 1em;
-            }
-            .grid-button i {
-                font-size: 3em;
-            }
-            .modal-content {
-                width: 90%;
-                padding: 30px;
-            }
-        }
-
+        /* Enlaces de navegación a páginas demo */
+        .grid-button a, .grid-button button { all: unset; display: flex; align-items: center; justify-content: center; width: 100%; height: 100%; cursor: pointer; }
     </style>
 </head>
 <body>
 
-    <div class="web-container">
+    <div class="smartphone-mockup">
+
         <header class="app-header">
             <h1>Co-Siembra Digital</h1>
-            <p>Conectando el campo con la oportunidad</p>
         </header>
 
         <main class="button-grid">
-            <a class="grid-button" onclick="showModal()">
+            <!-- Ahora cada botón es un enlace a su propia página demo -->
+            <a class="grid-button" href="pedir_credito.html" title="Ir a Pedir Crédito">
                 <i class="fa-solid fa-hand-holding-dollar"></i>
                 <span>Pedir Crédito</span>
             </a>
-            <a class="grid-button" onclick="showModal()">
+
+            <a class="grid-button" href="vender_cosecha.html" title="Ir a Vender Cosecha">
                 <i class="fa-solid fa-cart-shopping"></i>
                 <span>Vender Cosecha</span>
             </a>
-            <a class="grid-button" onclick="showModal()">
-                <i class="fa-solid fa-seedling"></i> <span>Asesor Técnico</span>
+
+            <a class="grid-button" href="asesor_tecnico.html" title="Ir a Asesor Técnico">
+                <i class="fa-solid fa-leaf"></i>
+                <span>Asesor Técnico</span>
             </a>
-            <a class="grid-button" onclick="showModal()">
-                <i class="fa-solid fa-people-group"></i> <span>Compras en Grupo</span>
+
+            <a class="grid-button" href="compras_grupo.html" title="Ir a Compras en Grupo">
+                <i class="fa-solid fa-users"></i>
+                <span>Compras en Grupo</span>
             </a>
         </main>
+
+        <div class="news-ticker">
+            <p><strong>Noticias Importantes:</strong> Abierta la convocatoria para créditos de siembra de temporada. • ¡Nuevos compradores en la región! Revisa la sección de mercado. •</p>
+        </div>
+
     </div>
 
-    <footer class="news-ticker">
-        <p><strong>Noticias Importantes:</strong> Abierta la convocatoria para créditos de siembra de temporada. • ¡Nuevos compradores en la región! Revisa la sección de mercado. • ¡Capacitación gratuita sobre cultivos sostenibles este viernes! •</p>
-    </footer>
-
+    <!-- Mantengo el modal para mensajes generales (se puede reutilizar) -->
     <div class="modal-overlay" id="constructionModal" onclick="closeModal()">
         <div class="modal-content" onclick="event.stopPropagation()">
-            <i class="fa-solid fa-person-digging"></i> <h2>¡Ups!</h2>
-            <p>Esta sección aún está en construcción. Estamos trabajando arduamente para traerte las mejores herramientas. ¡Volveremos pronto con más novedades!</p>
+            <i class="fa-solid fa-helmet-safety"></i>
+            <h2>¡Ups!</h2>
+            <p>Esta sección aún está en construcción. ¡Volveremos pronto con más herramientas para ti!</p>
             <button class="modal-close-button" onclick="closeModal()">Entendido</button>
         </div>
     </div>
 
     <script>
-        // Seleccionamos el elemento del modal
+        // Modal no usado por defecto en la demo principal,
+        // pero dejo las funciones por si quieres mostrarlo desde otras páginas.
         const modal = document.getElementById('constructionModal');
-
-        // Función para mostrar el modal
-        function showModal() {
-            modal.style.display = 'flex';
-        }
-
-        // Función para ocultar el modal
-        function closeModal() {
-            modal.style.display = 'none';
-        }
+        function showModal() { modal.style.display = 'flex'; }
+        function closeModal() { modal.style.display = 'none'; }
     </script>
 
 </body>
