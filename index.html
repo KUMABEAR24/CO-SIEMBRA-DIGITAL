@@ -49,24 +49,73 @@
             flex-direction: column;
         }
 
-        /* --- ENCABEZADO DE LA APP --- */
+        /* --- PANTALLAS --- */
+        .screen {
+            display: none; /* Ocultas por defecto */
+            flex-direction: column;
+            height: 100%;
+            overflow-y: auto; /* Permite scroll si el contenido es largo */
+            background-color: #f9f9f9; /* Fondo ligeramente diferente para las pantallas internas */
+        }
+
+        .screen.active {
+            display: flex; /* Solo la activa se muestra */
+        }
+
+        /* --- ENCABEZADO DE LA APP (General y Específico) --- */
         .app-header {
             padding: 50px 20px 20px 20px;
             text-align: center;
+            background-color: var(--white); /* Fondo blanco para el header */
+            position: sticky;
+            top: 0;
+            z-index: 10;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
         }
 
         .app-header h1 {
             font-size: 1.8em;
             font-weight: 600;
+            color: var(--primary-green);
         }
 
-        /* --- CUADRÍCULA DE BOTONES --- */
-        .button-grid {
+        .screen-header {
+             padding: 50px 20px 20px 20px;
+             display: flex;
+             align-items: center;
+             background-color: var(--primary-green);
+             color: var(--white);
+             position: sticky;
+             top: 0;
+             z-index: 10;
+        }
+
+        .back-button {
+            background: none;
+            border: none;
+            color: var(--white);
+            font-size: 1.5em;
+            cursor: pointer;
+            margin-right: 15px;
+        }
+
+        .screen-header h2 {
+            font-size: 1.5em;
+            font-weight: 600;
+            flex-grow: 1; /* Para que ocupe el espacio restante */
+            text-align: center; /* Centrado, aunque con el botón atrás a veces se ve un poco desplazado, se puede ajustar */
+             margin-right: 30px; /* Compensar visualmente el botón de atrás para centrar el título */
+        }
+
+
+        /* --- PANTALLA DE INICIO: Grid de Botones --- */
+        #home-screen .button-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 20px;
             padding: 20px;
             flex-grow: 1;
+            align-content: start; /* Alinea los botones arriba */
         }
 
         .grid-button {
@@ -77,6 +126,7 @@
             flex-direction: column;
             justify-content: center;
             align-items: center;
+            padding: 30px 10px; /* Un poco más de padding vertical */
             text-decoration: none;
             color: var(--dark-text);
             font-weight: 600;
@@ -104,7 +154,7 @@
             color: var(--white);
             padding: 12px 0;
             position: absolute;
-            bottom: 20px; /* Alineado sobre la barra de inicio del teléfono */
+            bottom: 20px;
             overflow: hidden;
             white-space: nowrap;
         }
@@ -120,7 +170,86 @@
             100% { transform: translateX(-200%); }
         }
 
-        /* --- VENTANA MODAL (MENSAJE EMERGENTE) --- */
+        /* --- CONTENIDO DE LAS PANTALLAS INTERNAS (Simulado) --- */
+        .screen-content {
+            padding: 20px;
+            flex-grow: 1;
+        }
+
+        .mock-form-group {
+            margin-bottom: 20px;
+        }
+
+        .mock-label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #555;
+        }
+
+        .mock-input, .mock-select, .mock-textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            font-family: inherit;
+            font-size: 0.95em;
+            background-color: var(--white);
+        }
+         .mock-textarea {
+            resize: vertical;
+            height: 100px;
+         }
+
+        .primary-action-btn {
+            width: 100%;
+            padding: 15px;
+            background-color: var(--primary-green);
+            color: var(--white);
+            border: none;
+            border-radius: 12px;
+            font-size: 1.1em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.3s;
+             margin-top: 10px;
+        }
+
+        .primary-action-btn:hover {
+            background-color: #248a7f;
+        }
+
+        /* Estilos específicos para listas o tarjetas en pantallas internas */
+        .mock-card {
+            background-color: var(--white);
+            padding: 15px;
+            border-radius: 15px;
+            margin-bottom: 15px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            display: flex;
+            align-items: center;
+        }
+        .mock-card-icon {
+            font-size: 2em;
+            color: var(--primary-green);
+            margin-right: 15px;
+            width: 50px; /* Ancho fijo para alinear */
+            text-align: center;
+        }
+        .mock-card-content {
+            flex-grow: 1;
+        }
+        .mock-card-title {
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+        .mock-card-subtitle {
+            font-size: 0.9em;
+            color: #777;
+        }
+
+
+        /* --- VENTANA MODAL (ALERTAS) --- */
         .modal-overlay {
             position: absolute;
             top: 0;
@@ -128,7 +257,7 @@
             width: 100%;
             height: 100%;
             background-color: rgba(0, 0, 0, 0.6);
-            display: none; /* Oculto por defecto */
+            display: none;
             justify-content: center;
             align-items: center;
             z-index: 1000;
@@ -136,11 +265,12 @@
 
         .modal-content {
             background-color: var(--white);
-            padding: 40px;
+            padding: 30px;
             border-radius: 20px;
             text-align: center;
             box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
-            width: 80%;
+            width: 85%;
+            max-width: 320px; /* Limite para que no sea gigante en pantallas grandes si se saca del mockup */
             transform: scale(0.9);
             animation: pop-in 0.3s forwards ease-out;
         }
@@ -151,19 +281,23 @@
 
         .modal-content i {
             font-size: 3em;
-            color: var(--primary-green);
+            color: var(--primary-green); /* Color por defecto, se puede cambiar por JS */
             margin-bottom: 20px;
         }
+        .modal-content i.success { color: var(--primary-green); }
+        .modal-content i.warning { color: #e9c46a; } /* Un amarillo/naranja para alertas */
+
 
         .modal-content h2 {
-            font-size: 1.5em;
+            font-size: 1.4em;
             margin-bottom: 10px;
         }
 
         .modal-content p {
             font-size: 1em;
             color: #666;
-            margin-bottom: 30px;
+            margin-bottom: 25px;
+            line-height: 1.4;
         }
 
         .modal-close-button {
@@ -176,67 +310,258 @@
             font-weight: 600;
             cursor: pointer;
             transition: background-color 0.2s ease;
+            width: 100%; /* Botón ancho en el modal */
         }
 
         .modal-close-button:hover { background-color: #248a7f; }
 
-        /* Enlaces de navegación a páginas demo */
-        .grid-button a, .grid-button button { all: unset; display: flex; align-items: center; justify-content: center; width: 100%; height: 100%; cursor: pointer; }
     </style>
 </head>
 <body>
 
     <div class="smartphone-mockup">
 
-        <header class="app-header">
-            <h1>Co-Siembra Digital</h1>
-        </header>
+        <!-- ================= PANTALLA DE INICIO ================= -->
+        <div id="home-screen" class="screen active">
+            <header class="app-header">
+                <h1>Co-Siembra Digital</h1>
+            </header>
 
-        <main class="button-grid">
-            <!-- Ahora cada botón es un enlace a su propia página demo -->
-            <a class="grid-button" href="pedir_credito.html" title="Ir a Pedir Crédito">
-                <i class="fa-solid fa-hand-holding-dollar"></i>
-                <span>Pedir Crédito</span>
-            </a>
+            <main class="button-grid">
+                <!-- Botones que navegan a las otras "pantallas" -->
+                <div class="grid-button" onclick="navigateTo('credito-screen')">
+                    <i class="fa-solid fa-hand-holding-dollar"></i>
+                    <span>Pedir Crédito</span>
+                </div>
 
-            <a class="grid-button" href="vender_cosecha.html" title="Ir a Vender Cosecha">
-                <i class="fa-solid fa-cart-shopping"></i>
-                <span>Vender Cosecha</span>
-            </a>
+                <div class="grid-button" onclick="navigateTo('venta-screen')">
+                    <i class="fa-solid fa-cart-shopping"></i>
+                    <span>Vender Cosecha</span>
+                </div>
 
-            <a class="grid-button" href="asesor_tecnico.html" title="Ir a Asesor Técnico">
-                <i class="fa-solid fa-leaf"></i>
-                <span>Asesor Técnico</span>
-            </a>
+                <div class="grid-button" onclick="navigateTo('asesor-screen')">
+                    <i class="fa-solid fa-leaf"></i>
+                    <span>Asesor Técnico</span>
+                </div>
 
-            <a class="grid-button" href="compras_grupo.html" title="Ir a Compras en Grupo">
-                <i class="fa-solid fa-users"></i>
-                <span>Compras en Grupo</span>
-            </a>
-        </main>
+                <div class="grid-button" onclick="navigateTo('compras-screen')">
+                    <i class="fa-solid fa-users"></i>
+                    <span>Compras en Grupo</span>
+                </div>
+            </main>
 
-        <div class="news-ticker">
-            <p><strong>Noticias Importantes:</strong> Abierta la convocatoria para créditos de siembra de temporada. • ¡Nuevos compradores en la región! Revisa la sección de mercado. •</p>
+            <div class="news-ticker">
+                <p><strong>Noticias:</strong> Abierta convocatoria créditos temporada. • ¡Nuevos compradores en la región! • Clima favorable para siembra de maíz esta semana.</p>
+            </div>
         </div>
 
-    </div>
+        <!-- ================= PANTALLA: PEDIR CRÉDITO ================= -->
+        <div id="credito-screen" class="screen">
+            <header class="screen-header">
+                <button class="back-button" onclick="navigateTo('home-screen')"><i class="fa-solid fa-arrow-left"></i></button>
+                <h2>Solicitud de Crédito</h2>
+            </header>
+            <div class="screen-content">
+                <p style="margin-bottom: 20px; color: #666;">Completa los datos para pre-aprobar tu microcrédito para insumos.</p>
+                
+                <div class="mock-form-group">
+                    <label class="mock-label">Monto Solicitado ($)</label>
+                    <input type="number" class="mock-input" placeholder="Ej: 500.000">
+                </div>
+                 <div class="mock-form-group">
+                    <label class="mock-label">Destino del Crédito</label>
+                    <select class="mock-select">
+                        <option>Semillas</option>
+                        <option>Fertilizantes</option>
+                        <option>Herramientas menores</option>
+                        <option>Otros insumos</option>
+                    </select>
+                </div>
+                <div class="mock-form-group">
+                    <label class="mock-label">Plazo de pago estimado</label>
+                     <select class="mock-select">
+                        <option>3 meses (post-cosecha)</option>
+                        <option>6 meses</option>
+                    </select>
+                </div>
 
-    <!-- Mantengo el modal para mensajes generales (se puede reutilizar) -->
-    <div class="modal-overlay" id="constructionModal" onclick="closeModal()">
-        <div class="modal-content" onclick="event.stopPropagation()">
-            <i class="fa-solid fa-helmet-safety"></i>
-            <h2>¡Ups!</h2>
-            <p>Esta sección aún está en construcción. ¡Volveremos pronto con más herramientas para ti!</p>
+                <button class="primary-action-btn" onclick="showModal('success', '¡Solicitud Enviada!', 'Tu pre-solicitud ha sido recibida. Un asesor contactará contigo en breve.')">
+                    Enviar Solicitud
+                </button>
+            </div>
+        </div>
+
+        <!-- ================= PANTALLA: VENDER COSECHA ================= -->
+        <div id="venta-screen" class="screen">
+             <header class="screen-header">
+                <button class="back-button" onclick="navigateTo('home-screen')"><i class="fa-solid fa-arrow-left"></i></button>
+                <h2>Ofertar Cosecha</h2>
+            </header>
+            <div class="screen-content">
+                 <p style="margin-bottom: 20px; color: #666;">Publica tu próxima cosecha para encontrar compradores.</p>
+
+                 <div class="mock-form-group">
+                    <label class="mock-label">Producto</label>
+                    <input type="text" class="mock-input" placeholder="Ej: Tomate chonto">
+                </div>
+                <div class="mock-form-group">
+                    <label class="mock-label">Cantidad Estimada (Kg)</label>
+                    <input type="number" class="mock-input" placeholder="Ej: 500">
+                </div>
+                 <div class="mock-form-group">
+                    <label class="mock-label">Fecha disp. aproximada</label>
+                    <input type="date" class="mock-input">
+                </div>
+                <div class="mock-form-group">
+                    <label class="mock-label">Precio esperado por Kg ($) (Opcional)</label>
+                    <input type="number" class="mock-input" placeholder="$">
+                </div>
+
+                 <button class="primary-action-btn" onclick="showModal('success', '¡Oferta Publicada!', 'Tu cosecha ahora es visible para los compradores aliados.')">
+                    Publicar Oferta
+                </button>
+            </div>
+        </div>
+
+        <!-- ================= PANTALLA: ASESOR TÉCNICO ================= -->
+        <div id="asesor-screen" class="screen">
+             <header class="screen-header">
+                <button class="back-button" onclick="navigateTo('home-screen')"><i class="fa-solid fa-arrow-left"></i></button>
+                <h2>Asistencia Técnica</h2>
+            </header>
+            <div class="screen-content">
+                <p style="margin-bottom: 15px; color: #666;">¿Tienes problemas con tu cultivo? Envíanos una consulta.</p>
+
+                 <div class="mock-form-group">
+                    <label class="mock-label">Tipo de Cultivo</label>
+                     <input type="text" class="mock-input" placeholder="Ej: Café, Plátano...">
+                </div>
+                <div class="mock-form-group">
+                    <label class="mock-label">Describe el problema</label>
+                    <textarea class="mock-textarea" placeholder="Ej: Hojas con manchas amarillas y secado prematuro..."></textarea>
+                </div>
+                 <div class="mock-card" style="border: 2px dashed #ccc; justify-content: center; padding: 20px; color: #999; cursor: pointer;" onclick="alert('(Simulación) Aquí se abriría la cámara o galería.')">
+                    <i class="fa-solid fa-camera" style="margin-right: 10px;"></i> Adjuntar Foto (Simulado)
+                </div>
+
+                <button class="primary-action-btn" onclick="showModal('success', 'Consulta Recibida', 'Un agrónomo revisará tu caso y te responderá por este medio.')">
+                    Enviar Consulta
+                </button>
+
+                <hr style="margin: 30px 0; border: none; border-top: 1px solid #eee;">
+
+                <h3 style="margin-bottom: 15px; color: var(--primary-green);">Consultas Recientes</h3>
+                <!-- Ejemplo de historial de consultas -->
+                 <div class="mock-card">
+                    <div class="mock-card-icon"><i class="fa-solid fa-check-circle"></i></div>
+                    <div class="mock-card-content">
+                        <div class="mock-card-title">Plaga en Yuca</div>
+                        <div class="mock-card-subtitle">Resuelto - Hace 2 días</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ================= PANTALLA: COMPRAS EN GRUPO ================= -->
+        <div id="compras-screen" class="screen">
+             <header class="screen-header">
+                <button class="back-button" onclick="navigateTo('home-screen')"><i class="fa-solid fa-arrow-left"></i></button>
+                <h2>Compras Colectivas</h2>
+            </header>
+            <div class="screen-content">
+                <p style="margin-bottom: 20px; color: #666;">Únete a pedidos grupales para obtener mejores precios en insumos.</p>
+
+                <h3 style="margin-bottom: 15px; color: var(--primary-green);">Grupos Activos</h3>
+
+                <!-- Tarjeta de Grupo 1 -->
+                <div class="mock-card">
+                    <div class="mock-card-icon"><i class="fa-solid fa-sack-xmark"></i></div>
+                    <div class="mock-card-content">
+                        <div class="mock-card-title">Fertilizante Triple 15</div>
+                        <div class="mock-card-subtitle">Cierre en: 3 días | Meta: 65%</div>
+                        <div style="background-color: #eee; height: 8px; border-radius: 4px; margin-top: 8px;">
+                            <div style="background-color: var(--primary-green); width: 65%; height: 100%; border-radius: 4px;"></div>
+                        </div>
+                    </div>
+                     <button style="background: var(--primary-green); color: white; border: none; padding: 8px 12px; border-radius: 8px; margin-left: 10px; cursor: pointer;" onclick="showModal('info', 'Unirse a Grupo', 'Has solicitado unirte al pedido de Fertilizante. Te contactaremos para confirmar cantidad.')">
+                        Unirme
+                    </button>
+                </div>
+
+                 <!-- Tarjeta de Grupo 2 -->
+                <div class="mock-card">
+                    <div class="mock-card-icon"><i class="fa-solid fa-seedling"></i></div>
+                    <div class="mock-card-content">
+                        <div class="mock-card-title">Semillas de Maíz Híbrido</div>
+                        <div class="mock-card-subtitle">Cierre en: 5 días | Meta: 40%</div>
+                        <div style="background-color: #eee; height: 8px; border-radius: 4px; margin-top: 8px;">
+                            <div style="background-color: var(--primary-green); width: 40%; height: 100%; border-radius: 4px;"></div>
+                        </div>
+                    </div>
+                     <button style="background: var(--primary-green); color: white; border: none; padding: 8px 12px; border-radius: 8px; margin-left: 10px; cursor: pointer;" onclick="showModal('info', 'Unirse a Grupo', 'Has solicitado unirte al pedido de Semillas. Te contactaremos para confirmar cantidad.')">
+                        Unirme
+                    </button>
+                </div>
+
+            </div>
+        </div>
+
+    </div> <!-- Fin smartphone-mockup -->
+
+
+    <!-- VENTANA MODAL GENÉRICA PARA MENSAJES -->
+    <div class="modal-overlay" id="genericModal" onclick="closeModal()">
+        <div class="modal-content" id="modalContent" onclick="event.stopPropagation()">
+            <i id="modalIcon" class="fa-solid fa-circle-check success"></i> <!-- Icono por defecto -->
+            <h2 id="modalTitle">Título Modal</h2>
+            <p id="modalMessage">Mensaje del modal aquí.</p>
             <button class="modal-close-button" onclick="closeModal()">Entendido</button>
         </div>
     </div>
 
     <script>
-        // Modal no usado por defecto en la demo principal,
-        // pero dejo las funciones por si quieres mostrarlo desde otras páginas.
-        const modal = document.getElementById('constructionModal');
-        function showModal() { modal.style.display = 'flex'; }
-        function closeModal() { modal.style.display = 'none'; }
+        // --- FUNCIÓN DE NAVEGACIÓN ENTRE PANTALLAS ---
+        function navigateTo(screenId) {
+            // 1. Ocultar todas las pantallas
+            const screens = document.querySelectorAll('.screen');
+            screens.forEach(screen => screen.classList.remove('active'));
+
+            // 2. Mostrar la pantalla deseada
+            const targetScreen = document.getElementById(screenId);
+            if (targetScreen) {
+                targetScreen.classList.add('active');
+                // Resetear scroll al navegar a una nueva pantalla
+                targetScreen.scrollTop = 0; 
+            }
+        }
+
+        // --- FUNCIONES DEL MODAL ---
+        const modalOverlay = document.getElementById('genericModal');
+        const modalIcon = document.getElementById('modalIcon');
+        const modalTitle = document.getElementById('modalTitle');
+        const modalMessage = document.getElementById('modalMessage');
+
+        function showModal(type, title, message) {
+            // Configurar contenido del modal según parámetros
+            modalTitle.textContent = title;
+            modalMessage.textContent = message;
+
+            // Configurar icono según el 'type'
+            modalIcon.className = "fa-solid"; // Reset de clases base
+            if (type === 'success') {
+                modalIcon.classList.add('fa-circle-check', 'success');
+            } else if (type === 'warning' || type === 'info') { // Usamos warning para info también por ahora en color, o podrías añadir otro estilo
+                 modalIcon.classList.add('fa-circle-info', 'warning'); // Icono de info, color 'warning' (amarillo/naranja) para destacar
+            } else {
+                 modalIcon.classList.add('fa-circle-exclamation'); // Default
+            }
+
+            modalOverlay.style.display = 'flex';
+        }
+
+        function closeModal() {
+            modalOverlay.style.display = 'none';
+        }
     </script>
 
 </body>
